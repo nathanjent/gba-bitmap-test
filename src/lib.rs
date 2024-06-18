@@ -7,6 +7,7 @@
 
 extern crate alloc;
 
+use agb::display::HEIGHT;
 use agb::include_palette;
 use agb::mgba::DebugLevel;
 use agb::mgba::Mgba;
@@ -56,6 +57,9 @@ pub fn entry(mut gba: agb::Gba) -> ! {
 }
 
 fn draw_page(bitmap: &mut Bitmap4 , image: &[u8], x: i32, y: i32, w: i32, h: i32) {
+    assert!(x + w <= WIDTH);
+    assert!(y + h <= HEIGHT);
+
     for row in x..h {
         for col in y..w {
             let frame_index = (row * WIDTH + col) as usize;
